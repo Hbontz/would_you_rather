@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.main-content {
+  text-align: center;
+  margin: 10px auto;
+  width: 480px;
+  font-family: "Open Sans", sans-serif;
+}
+Navbar {
+  width: 100%;
+}
+
+.navbar-brand {
+  font-family: "Bebas Neue", cursive;
+  font-size: 40px;
+}
+.nav-avatar {
+  height: 40px;
+  width: 40px;
+  margin: 0 10px 0 20px;
+}
+.nav-user {
+  margin-top: 10px;
+}
