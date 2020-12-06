@@ -9,7 +9,6 @@ import NavBar from "./NavBar";
 import Leaderboard from "./Leaderboard";
 import CreateQuestion from "./CreateQuestion";
 import QuestionInfo from "./QuestionInfo";
-import NotFound from "./NotFound";
 
 class App extends Component {
   componentDidMount() {
