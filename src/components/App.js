@@ -23,7 +23,7 @@ class App extends Component {
         <div className="main-content">
           <Switch>
             {noAuthedUser ? (
-              <Route path="/" exact component={LogIn} />
+              <Route path="/" component={LogIn} />
             ) : (
               <Route>
                 <Route path="/" exact component={Dashboard} />
@@ -31,10 +31,9 @@ class App extends Component {
                 <Route path="/add" component={CreateQuestion} />
                 <Route path="/questions/:id" component={QuestionInfo} />
                 <Route exact path="/logout" component={Logout} />
+                
               </Route>
             )}
-
-            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>

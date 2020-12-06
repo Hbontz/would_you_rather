@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleAnswer } from "../actions/shared";
+import NotFound from "./NotFound";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -18,17 +19,28 @@ class QuestionInfo extends Component {
   };
 
   render() {
-    const {
-      question,
-      author,
-      answer,
-      total,
-      percentageOne,
-      percentageTwo,
-      votesOptionOne,
-      votesOptionTwo,
-    } = this.props;
+    const { question, users, authedUser } = this.props;
+    if (!question) return <NotFound />;
     const { selectedOption } = this.state;
+    const author = users[question.author];
+    const answers = users[authedUser].answers;
+    let answer;
+    if (answers.hasOwnProperty(question.id)) {
+      answer = answers[question.id];
+    }
+
+    const votesOptionOne =
+      question && question.optionOne.votes
+        ? question.optionOne.votes.length
+        : 0;
+    const votesOptionTwo =
+      question && question.optionTwo.votes
+        ? question.optionTwo.votes.length
+        : 0;
+    const total = votesOptionOne + votesOptionTwo;
+
+    const percentageOne = ((votesOptionOne / total) * 100).toFixed(1);
+    const percentageTwo = ((votesOptionTwo / total) * 100).toFixed(1);
 
     return (
       <div>
@@ -113,32 +125,33 @@ class QuestionInfo extends Component {
 
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   const { id } = match.params;
-  const question = questions[id];
-  const author = users[question.author];
-  const answers = users[authedUser].answers;
-  let answer;
-  if (answers.hasOwnProperty(question.id)) {
-    answer = answers[question.id];
-  }
+  const question = questions[id] ? questions[id] : null;
+  //const author = users[question.author];
+  //const answers = users[authedUser].answers;
+  //let answer;
+  //if (answers.hasOwnProperty(question.id)) {
+  //  answer = answers[question.id];
+  //}
 
-  const votesOptionOne =
-    question && question.optionOne.votes ? question.optionOne.votes.length : 0;
-  const votesOptionTwo =
-    question && question.optionTwo.votes ? question.optionTwo.votes.length : 0;
-  const total = votesOptionOne + votesOptionTwo;
+  //const votesOptionOne =
+  //  question && question.optionOne.votes ? question.optionOne.votes.length : 0;
+  //const votesOptionTwo =
+  //  question && question.optionTwo.votes ? question.optionTwo.votes.length : 0;
+  //const total = votesOptionOne + votesOptionTwo;
 
-  const percentageOne = ((votesOptionOne / total) * 100).toFixed(1);
-  const percentageTwo = ((votesOptionTwo / total) * 100).toFixed(1);
+  //const percentageOne = ((votesOptionOne / total) * 100).toFixed(1);
+  //const percentageTwo = ((votesOptionTwo / total) * 100).toFixed(1);
   return {
-    id,
     question,
-    author,
-    answer,
-    total,
-    percentageOne,
-    percentageTwo,
-    votesOptionOne,
-    votesOptionTwo,
+    users,
+    authedUser,
+    //author,
+    //answer,
+    //total,
+    //percentageOne,
+    //percentageTwo,
+    //votesOptionOne,
+    //votesOptionTwo,
   };
 }
 

@@ -28,7 +28,7 @@ class LogIn extends Component {
       <div>
         <Form>
           <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Select a user to continue:</Form.Label>
+            <Form.Label>Login to continue:</Form.Label>
             <Form.Control
               as="select"
               value={userId}
